@@ -1,0 +1,17 @@
+# Swift Dependency Analyzer Configuration File
+# Copy this file to .swiftdeprc in your project root or home directory
+
+# Patterns to ignore (comma-separated)
+# Example: Tests/*, *_test.swift, Mock*.swift
+ignore_patterns = Tests/*, *_test.swift, Mock*.swift, *_Test.m
+
+# Custom file extensions to analyze (comma-separated)
+# These are added to the default extensions (.m, .mm, .swift, .h, .hh)
+custom_extensions = .c, .cpp, .cc
+
+# Enable or disable cache (true/false)
+cache_enabled = true
+
+# Maximum depth for dependency analysis (optional)
+# Useful for limiting analysis in very large projects
+# max_depth = 10
