@@ -192,3 +192,6 @@ REPORT.md
 tasklist.md
 test_*.py
 test_all_features.sh
+
+# MacOS
+.DS_Store
