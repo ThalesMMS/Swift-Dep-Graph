@@ -108,17 +108,22 @@ Artifacts are written to `output/<project_or_file_name>/` by default.
 ### Modular Design (v2.0)
 
 ```
-swift_dependency_analyzer/
-├── parsers/             # Language parsers
-│   ├── base_parser.py   # Shared parsing abstractions
-│   ├── objc_parser.py   # Objective-C and Objective-C++ support
-│   └── swift_parser.py  # Swift support
-├── graph/               # Graph construction and analysis
-│   ├── builder.py       # Graph builder
-│   └── analyzer.py      # Cycle detection, paths, metrics
-├── output/              # Output formatting (JSON, DOT, etc.)
-├── utils/               # File, cache, and configuration helpers
-└── test_generator/      # Synthetic project generator
+Swift-Dep-Graph/
+├── swift_dependency_analyzer/  # Main package
+│   ├── parsers/                # Language parsers
+│   │   ├── base_parser.py      # Shared parsing abstractions
+│   │   ├── objc_parser.py      # Objective-C and Objective-C++ support
+│   │   └── swift_parser.py     # Swift support
+│   ├── graph/                  # Graph construction and analysis
+│   │   ├── builder.py          # Graph builder
+│   │   └── analyzer.py         # Cycle detection, paths, metrics
+│   ├── utils/                  # File, cache, and configuration helpers
+│   └── test_generator/         # Synthetic project generator
+├── swift_dep_analyzer.py       # CLI entry point
+├── scripts/                    # Utility scripts
+│   └── scan_project.sh         # Project scanning utility
+└── legacy/                     # Legacy implementations
+    └── code_depth_graph.py     # Original monolithic script (v1.0)
 ```
 
 ### Processing Pipeline
@@ -184,6 +189,17 @@ shallow_mode = true
 include_modules = false
 ```
 
+## Utility Scripts
+
+The `scripts/` directory contains helper utilities:
+
+- **scan_project.sh**: Scans a project directory and collects source code into a single file for analysis or sharing context. Supports filtering by file lists and multiple programming languages.
+
+```bash
+# Usage
+./scripts/scan_project.sh <target_dir> <output_file> [files_list] [project_root]
+```
+
 ## Contributing
 
 Contributions are welcome through pull requests. Please open an issue to discuss substantial changes before submitting a PR.
@@ -219,4 +235,4 @@ For questions, bug reports, or feature requests, please open an issue on the pro
 
 ---
 
-Version 2.0 is a complete rewrite that replaces the original monolithic script. The original implementation remains available as `code_depth_graph.py` for reference.
+Version 2.0 is a complete rewrite that replaces the original monolithic script. The original implementation remains available in `legacy/code_depth_graph.py` for reference.
